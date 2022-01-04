@@ -13,12 +13,19 @@ class KeyboardViewController: UIInputViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        
+ 
         // Add custom view sizing constraints here
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let hodorButton = UIButton(type: UIButton.ButtonType.system)
+        hodorButton.frame = CGRect(x: 150, y: 50, width: 140, height: 120)
+        hodorButton.setBackgroundImage(UIImage(named: "hodor.jpeg"), for: UIControl.State.normal)
+        hodorButton.addTarget(self, action: #selector(hodorTapped), for: UIControl.Event.touchUpInside)
+        view.addSubview(hodorButton)
+        
+        
         
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
@@ -34,7 +41,11 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
-    
+    @objc func hodorTapped(){
+        let textProxy =  textDocumentProxy as UITextDocumentProxy
+        textProxy.insertText("Hodor")
+        //print("hodor tapped")
+    }
     override func viewWillLayoutSubviews() {
         self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
         super.viewWillLayoutSubviews()
